@@ -1,6 +1,8 @@
 
 
 mod 'thias/postfix'
-
+mod 'puppetlabs/stdlib'
+mod 'puppetlabs/concat'
+mod 'puppetlabs/apache'
 mod 'mailman',
     :git => 'https://github.com/thias/puppet-mailman'

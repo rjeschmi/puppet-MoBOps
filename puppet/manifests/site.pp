@@ -11,3 +11,14 @@ class {'::mailman':
         'MTA' => "'Postfix'",
     }
 }
+
+file { '/etc/apache2/conf-enabled/mailman.conf':
+    ensure => 'link',
+    target => '/etc/mailman/apache.conf',
+    notify => Service["apache2"],    
+}
+
+class { '::apache':
+    mpm_module => 'prefork',
+}
+
