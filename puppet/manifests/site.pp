@@ -9,12 +9,12 @@ class {'::mailman':
     default_email_host => 'lists.barleyment.ca',
     mm_cfg_settings     => {
         'MTA' => "'Postfix'",
+        'IMAGE_LOGOS' => "'/images/mailman/'",
     }
 }
 
-file { '/etc/apache2/conf-enabled/mailman.conf':
-    ensure => 'link',
-    target => '/etc/mailman/apache.conf',
+file { '/etc/apache2/conf.d/mailman.conf':
+    content => template('MoB/mailman_apache.conf.erb'),
     notify => Service["apache2"],    
 }
 

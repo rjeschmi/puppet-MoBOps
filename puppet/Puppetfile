@@ -6,3 +6,5 @@ mod 'puppetlabs/concat'
 mod 'puppetlabs/apache'
 mod 'mailman',
     :git => 'https://github.com/thias/puppet-mailman'
+mod 'MoB',
+    :git => 'git@github.com:rjeschmi/puppet-MoB.git'
