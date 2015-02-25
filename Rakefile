@@ -17,7 +17,9 @@ end
 task :migrate_lists do
     [ 'data', 'archives', 'lists' ].each { |dir|
         system ("rm -rf /var/lib/mailman#{dir}")
-        system ("ssh root@carboy.barleyment.ca tar czf - -C /var/lib/mailman #{dir} | tar xvzf - -C //var/lib/mailman") }
+        system ("ssh root@carboy.barleyment.ca tar czf - -C /var/lib/mailman #{dir} | tar xvzf - -C //var/lib/mailman") 
+        system ("chown -R list.list /var/lib/mailman/lists" )
+    }
 
 end
 
