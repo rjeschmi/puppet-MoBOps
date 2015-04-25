@@ -2,6 +2,7 @@
 class {'::postfix::server': 
 	myhostname => 'keg.barleyment.ca',
 	mydomain   => 'barleyment.ca',
+    mydestination => '$myhostname, localhost.$mydomain, localhost, lists.barleyment.ca, barleyment.ca, lists.yowsers.ca, yowsers.ca',
     alias_maps => 'hash:/etc/aliases,hash:/var/lib/mailman/data/aliases',
     inet_interfaces => 'all',
     inet_protocols => 'ipv4',
@@ -27,8 +28,21 @@ file { '/etc/apache2/conf.d/mailman.conf':
     notify => Service["apache2"],    
 }
 
+
+file { '/home/ubuntu/.ssh/authorized_keys':
+    content => file('MoB/ubuntu_authorized_keys'),
+    owner => ubuntu,
+    group => ubuntu,
+    mode => 600,
+}
+
+
 class { '::apache':
     mpm_module => 'prefork',
+}
+
+apache::vhost { 'www.yowers.ca':
+    docroot => '/var/www/www.yowsers.ca',
 }
 
 package { 'ntp':
