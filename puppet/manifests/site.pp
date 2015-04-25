@@ -9,6 +9,7 @@ class {'::postfix::server':
     spampd_children       => '4',
     master_services       => [ '127.0.0.1:10027 inet n  -       n       -      20       smtpd'],
     smtp_content_filter   => ['smtp:127.0.0.1:10026'],
+    mynetworks => "127.0.0.0/8 54.243.224.94",
 }
 
 class {'::mailman':
