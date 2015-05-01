@@ -39,9 +39,24 @@ file { '/home/ubuntu/.ssh/authorized_keys':
 
 class { '::apache':
     mpm_module => 'prefork',
+    default_vhost=>false,
 }
 
-apache::vhost { 'www.yowers.ca':
+
+apache::vhost { 'keg.barleyment.ca':
+    servername => 'keg.barleyment.ca',
+    port => '80',
+    priority => 15,
+    docroot  => '/var/www',
+    directories  => [
+        { path           => '/var/www',
+          allow_override => ['AuthConfig', 'Indexes'],
+        },
+    ]
+}
+apache::vhost { 'www.yowsers.ca':
+    servername => 'www.yowsers.ca',
+    port => '80',
     docroot => '/var/www/www.yowsers.ca',
 }
 
