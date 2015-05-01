@@ -45,6 +45,13 @@ apache::vhost { 'www.yowers.ca':
     docroot => '/var/www/www.yowsers.ca',
 }
 
+include apache::mod::php
+
 package { 'ntp':
     ensure => installed,
 }
+
+package { 'libapache2-mod-php5':
+    ensure => installed,
+}
+
